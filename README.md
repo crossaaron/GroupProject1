@@ -1,3 +1,5 @@
+# Check Asana for current task list
+
 ##################
 # Group Members #
 #################
@@ -9,7 +11,7 @@ Michelle Pinsky
 ##################
 # Topic #
 ##################
-
+Convention Collectable Planner
 
 ##################
 # Guidelines #
@@ -66,3 +68,30 @@ Michelle Pinsky
 - Simple or no authentication
 - JSON response returned
 - Well-documented
+
+#####################
+# Idea #
+#####################
+Is-it-worth-it-con
+Developing media-rich user interface for people to research conventions and experience the magic before they buy tickets. Saving your disposable income since 2017™.
+
+# APIs to be Used #
+Eventbrite
+Instagram or Flickr
+Youtube API
+Google Maps API
+Yelp API
+
+# Rough Task Breakdown #
+o	Set up tasks in Asana
+o	Build HTML structure
+    o	Mobile compliant
+    o	Create ease-in drop-down
+o	Build CSS styles
+o	Collect User data/create database (Firebase)
+o	Set up and test APIs
+o	Create logic
+    o	Dynamic element creation format
+    o	Create event listeners
+    o	JSON object organization
+    o	*Google maps or pricing functionality
