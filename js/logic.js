@@ -1,26 +1,22 @@
 // Initialize Variables Below Here //
-
-var interest = ""
-var location = ""
-var distance = ""
-
+const conSettings = {
+    url: 'https://www.eventbriteapi.com/v3/events/search/',
+    data: {token: 'PGYDBOPFSVG2QZQ64KDP', sort_by: 'distance',  'location.latitude': 37.7749, 'location.longitude': -122.4194, expand: 'venue'},
+    crossDomain: true,
+    method: 'GET'
+ }
+ 
+ $.ajax(conSettings).done(function(eventObject){
+    // All SF Area Events (Paginated by 50. Will only return first page.)
+    const events = eventObject.events;
+    // Create a new array of events whose venue is specifically in SF
+    const conEvents = events.filter(function(event){
+      return event.venue.address.city === 'San Francisco';
+    });
+    console.log(eventObject.events);    
+ });
 // AJAX Calls //
-$.ajax({
-    url: "https://www.eventbrite.com/oauth/authorize?response_type=token&client_id=7KPSIMHAIA7KBMEV6X"
-    method: "GET"
-}).done(
-    function (response){
-        $.ajax({
-            url: "https://www.eventbriteapi.com/v3/users/me/?token=PGYDBOPFSVG2QZQ64KDP/events/search"
-            method: "GET"
-        }).done(
-            function(results)
-        );
-    }
-);
 // Logic Below Here //
-$(document).ready(function() {
-
-})
-
-// Set Functions Below Here //
+// $(document).ready(function() {
+// });
+// Set Functions Below Here//
