@@ -6,7 +6,7 @@ const conSettings = {
     method: 'GET'
  }
 
- // AJAX Calls
+ // AJAX Calls :
 
  // Eventbrite
  $.ajax(conSettings).done(function(eventObject){
