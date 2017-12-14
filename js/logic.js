@@ -21,7 +21,7 @@ const conSettings = {
 
 // Pixabay
 $.ajax({
-    url: "https://pixabay.com/api/?key="+pixabayKey+"&q="+encodeURIComponent('san diego'),
+    url: "https://pixabay.com/api/?key="+"7371572-b4d7f234c51422f2be6d8c9f2"+"&q="+encodeURIComponent('san diego'),
     method: 'GET'
 }).done(function (response){
     for (var i = 0; i < 4; i++) {
