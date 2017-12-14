@@ -19,3 +19,9 @@ h2 {
 .container {
 
 }
+
+/* Google Maps Styles */
+#map {
+    height: 400px;
+    width: 100%;
+   }
