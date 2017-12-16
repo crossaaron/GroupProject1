@@ -84,7 +84,6 @@ $(document).ready(function() {
         var searchInterest;
         if ($("#interest").val()) searchInterest = $("#interest").val().trim();
 
-
         // Create Database object
 
         var newInput = {
