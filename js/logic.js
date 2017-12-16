@@ -10,28 +10,9 @@
   };
   
 
-  firebase.initializeApp(config);
+    firebase.initializeApp(config);
 
-var database = firebase.database();
-
-
-
-// Initialize Variables Below Here //
-
-// Create Database object
-
-var newInput = {
-    name: searchName || "",
-    location: searchLocation,
-    radius: searchRadius,
-    interest: searchInterest
-  };
-// This will need to be added to push data to the detail page
-  database.ref().push(newInput);
-
- // AJAX Calls
-
-
+    var database = firebase.database();
 
 
 // Pixabay
@@ -104,16 +85,13 @@ $(document).ready(function() {
             name: searchName || "",
             location: searchLocation,
             radius: searchRadius,
-            interest: searchInterest
+            interest: searchInterest, 
         };
         database.ref().push(newInput);       
 });
       
 })
-    $("#get-results").on("click", function() {
-        hitSubmit ();
-    });
-
+    
 
 // Set Functions Below Here //
 
