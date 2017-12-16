@@ -60,18 +60,9 @@ $.ajax({
       }
     
 
-
 // Logic Below Here //
-$(document).ready(function() {
 
-$("getResults").on('click', function() {
-    
 
-});
-
-    	
-
-})
 
 // Set Functions Below Here //
 
