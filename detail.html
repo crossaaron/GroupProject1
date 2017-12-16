@@ -18,7 +18,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+
   <script src="js/logic.js"></script>
+
+      <!-- Firebase Reference -->
+      <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+      </style>
+  
   
 </head>
 
@@ -45,6 +56,15 @@
               </ul>
             </div>
         </nav>
+        <div class = "userInputs">
+          <!-- <form> -->
+            Name: <input id="name" placeholder="Name of Event"> <br>
+            Location: <input id="location" placeholder="ex. Richmond"> <br>
+            Search Radius: <input id="searchRadius" placeholder="ex. 50 miles"> <br>
+            Interest: <input id="interest" placeholder="What interests you?"> <br>
+            <button type="submit" id="getResults" class="btn btn-primary">Submit</button>
+          <!-- </form> -->
+        </div>
 
         <!-- Content -->
         <div class="row">
@@ -64,20 +84,6 @@
         
         </div>
 
-        <div class="row">
-            <div class="col-md-12" id="youtube">
-                <video class="youtuberesult">
-                    <source src="#" type="#">
-                </video>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Replicate x4 in jQuery-->
-            <div class="col-md-3 yelp">
-                <p>Lorem ipsum</p>
-            </div>
-        </div>
 
         <div class="row">
             <!-- Google Maps here if we need it-->
@@ -89,7 +95,7 @@
 </body>
 
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtXevtm_ndCcVgCNJPosfToHZWVQ-ct78&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtXevtm_ndCcVgCNJPosfToHZWVQ-ct78&libraries=places&callback=initMap">
     </script>
 
 </html>
