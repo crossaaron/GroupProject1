@@ -1,17 +1,19 @@
 
-  
-  // Initialize Firebase
+ // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyDTUUzcW3TOaVVeJbhgnpqNXW6oSE5pBR8",
-    authDomain: "is-it-worth-it-con.firebaseapp.com",
-    databaseURL: "https://is-it-worth-it-con.firebaseio.com",
-    projectId: "is-it-worth-it-con",
-    storageBucket: "is-it-worth-it-con.appspot.com",
-    messagingSenderId: "67409493035"
+    apiKey: "AIzaSyDGdubFGBJWrTFXCFG88AMlwmVyyG1zfP4",
+    authDomain: "classdemo-743ef.firebaseapp.com",
+    databaseURL: "https://classdemo-743ef.firebaseio.com",
+    projectId: "classdemo-743ef",
+    storageBucket: "classdemo-743ef.appspot.com",
+    messagingSenderId: "109836927180"
   };
+  
+
   firebase.initializeApp(config);
 
 var database = firebase.database();
+
 
 
 // Initialize Variables Below Here //
@@ -47,9 +49,8 @@ $.ajax({
 );
 };
 
-
 //Google Places
-      function initMap() {
+       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -33.866, lng: 151.196},
           zoom: 15
@@ -77,14 +78,46 @@ $.ajax({
       }
     
 
-
 // Logic Below Here //
 $(document).ready(function() {
+
+    $("#getResults").on("click", function(event) {
+    console.log("hi");
+      event.preventDefault();
+      var interest = $('#interest').val().trim();
+        console.log(interest);
+        callPictures(interest);
+        hitSubmit();
+
+        var searchName;
+        if ($("#name").val()) searchName = $("#name").val().trim();
+        var searchLocation;
+        if ($("#location").val()) searchLocation = $("#location").val().trim();
+        var searchRadius;
+        if ($("#searchRadius").val()) searchRadius = $("#searchRadius").val().trim();
+        var searchInterest;
+        if ($("#interest").val()) searchInterest = $("#interest").val().trim();
+
+
+        // Create Database object
+
+        var newInput = {
+            name: searchName || "",
+            location: searchLocation,
+            radius: searchRadius,
+            interest: searchInterest
+        };
+        database.ref().push(newInput);       
+});
+      
+})
     $("#get-results").on("click", function() {
         hitSubmit ();
     });
 
+
 // Set Functions Below Here //
+
 
  // Eventbrite
  function hitSubmit(){
@@ -93,7 +126,7 @@ $(document).ready(function() {
         data: {
             token: 'PGYDBOPFSVG2QZQ64KDP', 
             sort_by: 'distance',  
-            q: $("#event-name").val().trim(),
+            q: $("#interest").val().trim(),
             "location.address": $("#location").val(), 
             "location.within": $("#searchRadius").val().trim() + "mi",
             expand: 'venue'  
@@ -113,5 +146,6 @@ $(document).ready(function() {
             }
             return event.venue.address.city === $("#location").val();
         });
+        console.log(eventObject.name);
     });
- }
+}
