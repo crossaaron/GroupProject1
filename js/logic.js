@@ -1,10 +1,42 @@
+
+  
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDTUUzcW3TOaVVeJbhgnpqNXW6oSE5pBR8",
+    authDomain: "is-it-worth-it-con.firebaseapp.com",
+    databaseURL: "https://is-it-worth-it-con.firebaseio.com",
+    projectId: "is-it-worth-it-con",
+    storageBucket: "is-it-worth-it-con.appspot.com",
+    messagingSenderId: "67409493035"
+  };
+  firebase.initializeApp(config);
+
+var database = firebase.database();
+
+
 // Initialize Variables Below Here //
+
+// Create Database object
+
+var newInput = {
+    name: searchName || "",
+    location: searchLocation,
+    radius: searchRadius,
+    interest: searchInterest
+  };
+// This will need to be added to push data to the detail page
+  database.ref().push(newInput);
 
  // AJAX Calls
 
+
+
+
 // Pixabay
+var callPictures = function(interestInput) {
+
 $.ajax({
-    url: "https://pixabay.com/api/?key="+"7371572-b4d7f234c51422f2be6d8c9f2"+"&q="+encodeURIComponent('san diego'),
+    url: "https://pixabay.com/api/?key="+"7371572-b4d7f234c51422f2be6d8c9f2"+"&q="+encodeURIComponent(interestInput),
     method: 'GET'
 }).done(function (response){
     for (var i = 0; i < 4; i++) {
@@ -13,6 +45,8 @@ $.ajax({
     console.log(response.hits[0].webformatURL);
     }
 );
+};
+
 
 //Google Places
       function initMap() {
@@ -49,7 +83,6 @@ $(document).ready(function() {
     $("#get-results").on("click", function() {
         hitSubmit ();
     });
-})
 
 // Set Functions Below Here //
 
