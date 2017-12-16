@@ -1,3 +1,4 @@
+
  // Initialize Firebase
   var config = {
     apiKey: "AIzaSyDGdubFGBJWrTFXCFG88AMlwmVyyG1zfP4",
@@ -8,19 +9,30 @@
     messagingSenderId: "109836927180"
   };
   
+
   firebase.initializeApp(config);
 
 var database = firebase.database();
 
-// Initialize Variables Below Here //
-const conSettings = {
-    url: 'https://www.eventbriteapi.com/v3/events/search/',
-    data: {token: 'PGYDBOPFSVG2QZQ64KDP', sort_by: 'distance',  'location.latitude': 37.7749, 'location.longitude': -122.4194, expand: 'venue'},
-    crossDomain: true,
-    method: 'GET'
- }
 
- // AJAX Calls :
+
+// Initialize Variables Below Here //
+
+// Create Database object
+
+var newInput = {
+    name: searchName || "",
+    location: searchLocation,
+    radius: searchRadius,
+    interest: searchInterest
+  };
+// This will need to be added to push data to the detail page
+  database.ref().push(newInput);
+
+ // AJAX Calls
+
+
+
 
 // Pixabay
 var callPictures = function(interestInput) {
@@ -68,6 +80,7 @@ $.ajax({
 
 // Logic Below Here //
 $(document).ready(function() {
+
     $("#getResults").on("click", function(event) {
       event.preventDefault();
       var interest = $('#interest').val().trim();
@@ -97,14 +110,19 @@ $(document).ready(function() {
 });
       
 })
+    $("#get-results").on("click", function() {
+        hitSubmit ();
+    });
 
 
 // Set Functions Below Here //
+
 
 // Eventbrite
 function hitSubmit() {
     $('#eventBox').empty();
     $('.pictures').empty();
+ 
     const conSettings = {
         url: 'https://www.eventbriteapi.com/v3/events/search/',
         data: {
@@ -140,5 +158,3 @@ function hitSubmit() {
     console.log(sfEvents.length);    
     });
 }
-
-
