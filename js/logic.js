@@ -18,21 +18,7 @@ var database = firebase.database();
 
 // Initialize Variables Below Here //
 
-// Create Database object
-
-var newInput = {
-    name: searchName || "",
-    location: searchLocation,
-    radius: searchRadius,
-    interest: searchInterest
-  };
-// This will need to be added to push data to the detail page
-  database.ref().push(newInput);
-
  // AJAX Calls
-
-
-
 
 // Pixabay
 var callPictures = function(interestInput) {
