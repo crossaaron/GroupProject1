@@ -15,25 +15,19 @@ var database = firebase.database();
 
 
 // Initialize Variables Below Here //
-const conSettings = {
-    url: 'https://www.eventbriteapi.com/v3/events/search/',
-    data: {token: 'PGYDBOPFSVG2QZQ64KDP', sort_by: 'distance',  'location.latitude': 37.7749, 'location.longitude': -122.4194, expand: 'venue'},
-    crossDomain: true,
-    method: 'GET'
- }
 
- // AJAX Calls :
+// Create Database object
 
- // Eventbrite
- $.ajax(conSettings).done(function(eventObject){
-    // All SF Area Events (Paginated by 50. Will only return first page.)
-    const events = eventObject.events;
-    // Create a new array of events whose venue is specifically in SF
-    const conEvents = events.filter(function(event){
-      return event.venue.address.city === 'San Francisco';
-    });
-    console.log(eventObject.events);    
- });
+var newInput = {
+    name: searchName || "",
+    location: searchLocation,
+    radius: searchRadius,
+    interest: searchInterest
+  };
+// This will need to be added to push data to the detail page
+  database.ref().push(newInput);
+
+ // AJAX Calls
 
 
 
@@ -86,47 +80,38 @@ $.ajax({
 
 // Logic Below Here //
 $(document).ready(function() {
-    $("#getResults").on("click", function(event) {
-    console.log("hi");
-      event.preventDefault();
-      var interest = $('#interest').val().trim();
-        console.log(interest);
-        callPictures(interest);
-
-$("getResults").on('click', function() {
-    
-
-});
-
-
-        var searchName;
-        if ($("#name").val()) searchName = $("#name").val().trim();
-        var searchLocation;
-        if ($("#location").val()) searchLocation = $("#location").val().trim();
-        var searchRadius;
-        if ($("#searchRadius").val()) searchRadius = $("#searchRadius").val().trim();
-        var searchInterest;
-        if ($("#interest").val()) searchInterest = $("#interest").val().trim();
-
-
-        // Create Database object
-
-        var newInput = {
-            name: searchName || "",
-            location: searchLocation,
-            radius: searchRadius,
-            interest: searchInterest
-        };
-        database.ref().push(newInput);
-
-
-        
-});
-    	
-})
+    $("#get-results").on("click", function() {
+        hitSubmit ();
+    });
 
 // Set Functions Below Here //
 
+ // Eventbrite
+ function hitSubmit(){
+    const conSettings = {
+        url: 'https://www.eventbriteapi.com/v3/events/search/',
+        data: {
+            token: 'PGYDBOPFSVG2QZQ64KDP', 
+            sort_by: 'distance',  
+            q: $("#event-name").val().trim(),
+            "location.address": $("#location").val(), 
+            "location.within": $("#searchRadius").val().trim() + "mi",
+            expand: 'venue'  
+        }, 
+        crossDomain: true,
+        method: 'GET'
+     }
+    $.ajax(conSettings).done(function(eventObject){
+        // All SF Area Events (Paginated by 50. Will only return first page.)
+        // for (var i = 0; i < 4; i++) {            
+        const events = eventObject.events;
+        const sfEvents = events.filter(function(event){
+            events.forEach(pushEvent);
 
-
-
+            function pushEvent(event){
+                console.log(event);
+            }
+            return event.venue.address.city === $("#location").val();
+        });
+    });
+ }
