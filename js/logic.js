@@ -31,12 +31,17 @@ $.ajax({
 };
 
 //Google Places
-       function initMap() {
+    var initMap = function(latitude, longitude) {
+        var uluru = {lat: latitude, lng: longitude};
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.866, lng: 151.196},
+          center: uluru,
           zoom: 15
         });
-
+        var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+        });
+console.log(latitude);
         var infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
 
@@ -119,19 +124,23 @@ function hitSubmit() {
         method: 'GET'
      }
     $.ajax(conSettings).done(function(eventObject){
-        // All SF Area Events (Paginated by 50. Will only return first page.)            
+                
         const events = eventObject.events;
         const sfEvents = events.filter(function(event){
                 console.log(event);
                 console.log(event.name.text);
                 console.log(event.description.text);
                 console.log(event.end.utc);
-                console.log(event.venue.address.latitude);
+                console.log(parseFloat(event.venue.address.latitude));
                 console.log(event.venue.address.longitude);
                 console.log(event.url);
-        $("#eventBox").prepend('<div class="card listEntry"> <div class="card-header"> <div class="row"> <div class="col-md-3" id="name">' + event.name.text + '</div> <div class="col-md-3" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-3" id="location">' +event.venue.address.city + '</div> <div class="col-md-3" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <p class="card-text" id="eventDescription">' + event.description.text + '</p></div></div>'); 
+        $("#eventBox").prepend('<div class="card listEntry"> <div class="card-header"> <div class="row"> <div class="col-md-3" id="name">' + event.name.text + '</div> <div class="col-md-3" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-3" id="location">' +event.venue.address.city + '</div> <div class="col-md-3" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <p class="card-text" id="eventDescription">' + event.description.text + '</p></div></div>');
+
+            initMap(parseFloat(event.venue.address.latitude), parseFloat(event.venue.address.longitude));   
 
             return event.venue.address.city.toLowerCase() === $("#location").val().toLowerCase();
+
+            
         });
     console.log(sfEvents.length);    
     });
