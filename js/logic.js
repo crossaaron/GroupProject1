@@ -12,8 +12,7 @@
 
     firebase.initializeApp(config);
 
-    var database = firebase.database();
-
+    var database = firebase.database();  
 
 // Pixabay
 var callPictures = function(interestInput) {
@@ -38,10 +37,10 @@ $.ajax({
           zoom: 15
         });
         var marker = new google.maps.Marker({
-            position: uluru,
+            position: uluru ,
             map: map
         });
-console.log(latitude);
+
         var infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
 
@@ -53,6 +52,8 @@ console.log(latitude);
               map: map,
               position: place.geometry.location
             });
+            // RATING CALL just need DIV //
+            console.log(place.rating);
             google.maps.event.addListener(marker, 'click', function() {
               infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
                 'Place ID: ' + place.place_id + '<br>' +
@@ -61,16 +62,15 @@ console.log(latitude);
             });
           }
         });
-      }
-    
+      } 
 
 // Logic Below Here //
 $(document).ready(function() {
 
     $("#getResults").on("click", function(event) {
       event.preventDefault();
+
       var interest = $('#interest').val().trim();
-        console.log(interest);
         callPictures(interest);
         hitSubmit();
 
@@ -127,16 +127,18 @@ function hitSubmit() {
                 
         const events = eventObject.events;
         const sfEvents = events.filter(function(event){
-                console.log(event);
-                console.log(event.name.text);
-                console.log(event.description.text);
-                console.log(event.end.utc);
-                console.log(parseFloat(event.venue.address.latitude));
-                console.log(event.venue.address.longitude);
-                console.log(event.url);
-        $("#eventBox").prepend('<div class="card listEntry"> <div class="card-header"> <div class="row"> <div class="col-md-3" id="name">' + event.name.text + '</div> <div class="col-md-3" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-3" id="location">' +event.venue.address.city + '</div> <div class="col-md-3" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <p class="card-text" id="eventDescription">' + event.description.text + '</p></div></div>');
-
-            initMap(parseFloat(event.venue.address.latitude), parseFloat(event.venue.address.longitude));   
+                // console.log(event);
+                // console.log(event.name.text);
+                // console.log(event.description.text);
+                // console.log(event.end.utc);
+                // console.log(parseFloat(event.venue.address.latitude));
+                // console.log(event.venue.address.longitude);
+                // console.log(event.url);
+        $("#eventBox").prepend('<div class="card listEntry"> <div class="card-header"> <div class="row"> <div class="col-md-3" id="name">' + event.name.text + '</div> <div class="col-md-3" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-3" id="location">' +event.venue.address.city + '</div> <div class="col-md-3" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="row"><div class="col-md-12 googlemaps"><div id="map"></div></div></div></div>');
+        
+        
+            initMap(parseFloat(event.venue.address.latitude), parseFloat(event.venue.address.longitude));
+               
 
             return event.venue.address.city.toLowerCase() === $("#location").val().toLowerCase();
 
