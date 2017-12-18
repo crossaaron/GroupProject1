@@ -120,13 +120,10 @@ $(document).ready(function() {
         crossDomain: true,
         method: 'GET'
      }
-    $.ajax(conSettings).done(function(eventObject){
-        // All SF Area Events (Paginated by 50. Will only return first page.)
-        // for (var i = 0; i < 4; i++) {            
+    $.ajax(conSettings).done(function(eventObject){           
         const events = eventObject.events;
         const sfEvents = events.filter(function(event){
             events.forEach(pushEvent);
-
             function pushEvent(event){
                 console.log(event);
             }
