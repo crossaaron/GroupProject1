@@ -34,163 +34,53 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="jumbotron jumbotron-fluid">
-          <h1 class="display-3">Is-It-Worth-It-Con?</h1>
-          <p class="lead">Experience an event before you go.</p>
-        </div>
+      <div class="jumbotron jumbotron-fluid">
+        <img src="images/logo.svg">
+      </div>
       
-        <div class = "userInputs">
-          <form>
-            Name: <input id="name" placeholder="John Smith"></br>
-            Event Name: <input id="event-name" placeholder="Name of Event"> <br>
-            Location: <input id="location" placeholder="ex. Richmond"> <br>
-            Search Radius: <input id="searchRadius" placeholder="ex. 50 miles"> <br>
-            <input id="get-results" type="submit">
-          </form>
+      <!-- Inputs -->
+    <div class="wrapper">          
+      <div class=" col-md-12 defaultdiv">          
+        <div class="form-group like-table">
+          <ul class="hypers like-table-row">
+            <li class="like-table-cell"><input id="name" placeholder="John Smith"></li>
+            <li class="like-table-cell"><input id="location" placeholder="ex. Richmond"></li>
+            <li class="like-table-cell"><input id="searchRadius" placeholder="ex. 30 miles"></li>
+            <li class="like-table-cell"><input id="interest" placeholder="ex. sports"></li>
+            <li class="like-table-cell"><input data-best="best" id="getResults" type="submit"></li>
+        </ul>
         </div>
+    
+  
+    <!-- Sort By Buttons-->
+    <div class="form-group like-table" id="filterButtons">
+      <ul class="hypers like-table-row">
+        <li class="like-table-cell"><button data-capacity="capacity" type="button" class="btn btn-primary">High Cap</button></li>
+        <li class="like-table-cell"><button data-distance="distance"type="button" class="btn btn-primary">Nearest</button></li>
+        <li class="like-table-cell"><button data-date="date" type="button" class="btn btn-primary">Date</button></li>
+      </ul>
+    </div>
+    
+    <!-- Results -->
+    <marquee behavior="scroll" direction="left">
+    <div id="pixabay"></div>
+    </marquee>
+
+    
+      <div class="container" id="eventBox">
+
+      <div class="card">
+
+      </div>
     </div>
 
-    <div class="container" id="filterButtons" style="margin-top: 40px">
-    <div class="row justify-content-around">
-      <div class="col-md-2"
-        <button type="button" class="btn btn-primary">High Cap</button>
-      </div>
-      <div class="col-md-2"
-        <button type="button" class="btn btn-primary">Price $ - $$$</button>
-      </div>
-      <div class="col-md-2"
-        <button type="button" class="btn btn-primary">Nearest</button>
-      </div>
-      <div class="col-md-2"
-        <button type="button" class="btn btn-primary">Date</button>
-      </div>
-    </div>
+    <!-- Detail Page -->
+    <div class="secondarydiv">
+      <div id="Results">Eventbrite event here</div>
+      <div id="pixabay">Pixabay pictures x4</div>
+      <div id="rating">Google places rating</div>
+ 
+    </div>        
   </div>
-
-  <div class="container" style="margin-top: 40px">
-    <div class="card">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-md-3" id="name">NAME</div>
-          <div class="col-md-3" id="price">$$$</div>
-          <div class="col-md-3" id="location">LOCATION</div>
-          <div class="col-md-3" id="date">DATE</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h4 class="card-title">Event Description</h4>
-        <p class="card-text" id="eventDescription">all the juicy details about how to make it a great time and past experiences.  Maybe a button to go the the event page?</p>
-      </div>
-    </div>
-    <div class="row" style="margin-top: 40px">
-      <!-- Google Maps here if we need it-->
-        <div class="col-md-12 googlemaps">
-          <div id="map"></div>
-        </div>            
-    </div>
-  </div>
-
-
-
-
-  </body>
-</html> 
-
 </body>
 </html>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Is-it-worth-it-con</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/reset.css">
-
-  <!-- I'll adjust the bootstrap once we have a topic/layout nailed down -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
-  <!-- I'll add fonts here as a last step once we get logic working -->
-  <link rel="stylesheet" type="text/css" href="css/style.css">  
-
-  <!-- Javascript and jQuery -->
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- Bootstrap -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-  <!-- Google Places  -->
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArlFHWVcjkg8WiQljm_jOx0dObvApNOy8&libraries=places&callback=initMap">
-  </script>
-  <!-- Team Created Logic -->
-  <script src="js/logic.js"></script>
-
-  
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="jumbotron jumbotron-fluid">
-          <h1 class="display-3">Is-It-Worth-It-Con?</h1>
-          <p class="lead">Experience an event before you go.</p>
-        </div>
-      
-        <div class = "userInputs">
-          <form>
-            Name: <input id="name" placeholder="Name of Event"> <br>
-            Location: <input id="location" placeholder="ex. Richmond"> <br>
-            Search Radius: <input id="searchRadius" placeholder="ex. 50 miles"> <br>
-            Interest: <input id="interest" placeholder="What interests you?"> <br>
-            <input id="getResults" type="submit">
-          </form>
-        </div>
-    </div>
-
-    <div class="container" id="filterButtons" style="margin-top: 40px">
-    <div class="row justify-content-around">
-      <div class="col-md-2"
-        <button type="button" class="btn btn-primary">High Cap</button>
-      </div>
-      <div class="col-md-2"
-        <button type="button" class="btn btn-primary">Price $ - $$$</button>
-      </div>
-      <div class="col-md-2"
-        <button type="button" class="btn btn-primary">Nearest</button>
-      </div>
-      <div class="col-md-2"
-        <button type="button" class="btn btn-primary">Date</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="container" style="margin-top: 40px">
-    <div class="card">
-      <div class="card-header">
-        <div class="row">
-          <div class="col-md-3" id="name">NAME</div>
-          <div class="col-md-3" id="price">$$$</div>
-          <div class="col-md-3" id="location">LOCATION</div>
-          <div class="col-md-3" id="date">DATE</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h4 class="card-title">Event Description</h4>
-        <p class="card-text" id="eventDescription">all the juicy details about how to make it a great time and past experiences.  Maybe a button to go the the event page?</p>
-      </div>
-    </div>
-    <div class="row" style="margin-top: 40px">
-      <!-- Google Maps here if we need it-->
-        <div class="col-md-12 googlemaps">
-          <div id="map"></div>
-        </div>            
-    </div>
-  </div>
-
-
-
-
-  </body>
-</html> 
