@@ -19,16 +19,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Bootstrap -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
   <!-- Google Places  -->
-   <script async defer
+  <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArlFHWVcjkg8WiQljm_jOx0dObvApNOy8&libraries=places&callback=initMap">
   </script>
   <!-- firebase -->
   <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  
+<!-- firebase storage -->
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script>
 
   <!-- Team Created Logic -->
   <script src="js/logic.js"></script>
-
 
   
 </head>
@@ -37,50 +40,35 @@
       <div class="jumbotron jumbotron-fluid">
         <img src="images/logo.svg">
       </div>
-      
+    
+    
+    <!-- Sort By Buttons-->
+  <div class="wrapper">
+    <div class="col-md-12 defaultdiv">
+      <div class="form-group like-table" id="filterButtons">
+        <ul class="hypers like-table-row">
+          <li class="like-table-cell"><button data-capacity="capacity" type="button" class="btn btn-primary">High Cap</button></li>
+          <li class="like-table-cell"><button data-distance="distance"type="button" class="btn btn-primary">Nearest</button></li>
+          <li class="like-table-cell"><button data-date="date" type="button" class="btn btn-primary">Date</button></li>
+        </ul>
+      </div>
+    </div>
       <!-- Inputs -->
-    <div class="wrapper">          
       <div class=" col-md-12 defaultdiv">          
         <div class="form-group like-table">
           <ul class="hypers like-table-row">
-            <li class="like-table-cell"><input id="name" placeholder="John Smith"></li>
-            <li class="like-table-cell"><input id="location" placeholder="ex. Richmond"></li>
-            <li class="like-table-cell"><input id="searchRadius" placeholder="ex. 30 miles"></li>
-            <li class="like-table-cell"><input id="interest" placeholder="ex. sports"></li>
+            <li class="like-table-cell"><input id="name" value="John Smith"></li>
+            <li class="like-table-cell"><input id="interest" value="comic"></li>
+            <li class="like-table-cell"><input id="location" value=" Richmond"></li>
+            <li class="like-table-cell"><input id="searchRadius" value="50"></li>
             <li class="like-table-cell"><input data-best="best" id="getResults" type="submit"></li>
-        </ul>
+          </ul>
         </div>
-    
-  
-    <!-- Sort By Buttons-->
-    <div class="form-group like-table" id="filterButtons">
-      <ul class="hypers like-table-row">
-        <li class="like-table-cell"><button data-capacity="capacity" type="button" class="btn btn-primary">High Cap</button></li>
-        <li class="like-table-cell"><button data-distance="distance"type="button" class="btn btn-primary">Nearest</button></li>
-        <li class="like-table-cell"><button data-date="date" type="button" class="btn btn-primary">Date</button></li>
-      </ul>
-    </div>
-    
-    <!-- Results -->
-    <marquee behavior="scroll" direction="left">
-    <div id="pixabay"></div>
-    </marquee>
-
-    
-      <div class="container" id="eventBox">
-
-      <div class="card">
-
       </div>
-    </div>
 
-    <!-- Detail Page -->
-    <div class="secondarydiv">
-      <div id="Results">Eventbrite event here</div>
-      <div id="pixabay">Pixabay pictures x4</div>
-      <div id="rating">Google places rating</div>
- 
-    </div>        
-  </div>
-</body>
-</html>
+<!-- event list items  -->
+  <div class="container" id="eventBox" style="margin-top: 40px">  </div>
+ </div> <!--Wrapper End -->
+
+  </body>
+</html> 

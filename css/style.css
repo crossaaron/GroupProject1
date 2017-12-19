@@ -71,6 +71,7 @@ align-items: center;
     margin-bottom: 40px;
 }
 
+
 .btn {
     border-radius: 0px;
     border-style: solid;
@@ -97,11 +98,12 @@ align-items: center;
 	width:230px;
 	height:200px;
 	margin:0px 2px 10px 0px;
+
 }
 
 /* Google Maps Styles */
 #map {
-    height: 400px;
+    height: 200px;
     width: 100%;
    }
 
