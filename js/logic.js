@@ -10,36 +10,35 @@
   };
   
 
-  firebase.initializeApp(config);
-
-var database = firebase.database();
-
-
-
-// Initialize Variables Below Here //
-
- // AJAX Calls
-
+    firebase.initializeApp(config);
+    var database = firebase.database();  
+    
 // Pixabay
-var callPictures = function(interestInput) {
+// var callPictures = function(interestInput) {
 
-$.ajax({
-    url: "https://pixabay.com/api/?key="+"7371572-b4d7f234c51422f2be6d8c9f2"+"&q="+encodeURIComponent(interestInput),
-    method: 'GET'
-}).done(function (response){
-    for (var i = 0; i < 4; i++) {
-    $('.pictures').prepend("<img class = 'searchImages' src='" + response.hits[i].webformatURL + "'>");
-    };
-    console.log(response.hits[0].webformatURL);
-    }
-);
-};
+// $.ajax({
+//     url: "https://pixabay.com/api/?key="+"7371572-b4d7f234c51422f2be6d8c9f2"+"&q="+encodeURIComponent(interestInput),
+//     method: 'GET'
+// }).done(function (response){
+//     for (var i = 0; i < 4; i++) {
+//     $('.pictures').prepend("<img class = 'searchImages' src='" + response.hits[i].webformatURL + "'>");
+//     };
+//     console.log(response.hits[0].webformatURL);
+//     }
+// );
+// };
+
 
 //Google Places
-       function initMap() {
+    var initMap = function(latitude, longitude) {
+        var uluru = {lat: latitude, lng: longitude};
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.866, lng: 151.196},
+          center: uluru,
           zoom: 15
+        });
+        var marker = new google.maps.Marker({
+            position: uluru ,
+            map: map
         });
 
         var infowindow = new google.maps.InfoWindow();
@@ -53,6 +52,9 @@ $.ajax({
               map: map,
               position: place.geometry.location
             });
+            // RATING CALL just need DIV?
+            $(place.rating);
+
             google.maps.event.addListener(marker, 'click', function() {
               infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
                 'Place ID: ' + place.place_id + '<br>' +
@@ -61,18 +63,25 @@ $.ajax({
             });
           }
         });
-      }
-    
+      } 
 
 // Logic Below Here //
 $(document).ready(function() {
 
+    $(function(){
+        var $select = $("#searchRadius");
+        for (i=10;i<=100;i=i+10){
+            $select.append($('<option></option>').val(i).html(i))
+        }
+    });
+
+
+
     $("#getResults").on("click", function(event) {
-    console.log("hi");
       event.preventDefault();
+
       var interest = $('#interest').val().trim();
-        console.log(interest);
-        callPictures(interest);
+        // callPictures(interest);
         hitSubmit();
 
         var searchName;
@@ -90,22 +99,22 @@ $(document).ready(function() {
             name: searchName || "",
             location: searchLocation,
             radius: searchRadius,
-            interest: searchInterest
+            interest: searchInterest, 
         };
         database.ref().push(newInput);       
 });
       
 })
-    $("#get-results").on("click", function() {
-        hitSubmit ();
-    });
-
+    
 
 // Set Functions Below Here //
 
 
- // Eventbrite
- function hitSubmit(){
+// Eventbrite
+function hitSubmit() {
+    $('#eventBox').empty();
+    $('.pictures').empty();
+ 
     const conSettings = {
         url: 'https://www.eventbriteapi.com/v3/events/search/',
         data: {
@@ -114,23 +123,30 @@ $(document).ready(function() {
             q: $("#interest").val().trim(),
             "location.address": $("#location").val(), 
             "location.within": $("#searchRadius").val().trim() + "mi",
-            expand: 'venue'  
+            expand: 'venue'
+              
+        },
+        "pagination": {
+            "object_count": 5
         }, 
         crossDomain: true,
         method: 'GET'
      }
     $.ajax(conSettings).done(function(eventObject){
-        // All SF Area Events (Paginated by 50. Will only return first page.)
-        // for (var i = 0; i < 4; i++) {            
+                
         const events = eventObject.events;
         const sfEvents = events.filter(function(event){
-            events.forEach(pushEvent);
 
-            function pushEvent(event){
-                console.log(event);
-            }
-            return event.venue.address.city === $("#location").val();
+                
+        $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-3" id="name">' + event.name.text + '</div> <div class="col-md-3" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-3" id="location">' +event.venue.address.city + '</div> <div class="col-md-3" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-8><p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="col-md-4 googlemaps"><div id="map"></div></div>');
+        
+            initMap(parseFloat(event.venue.address.latitude), parseFloat(event.venue.address.longitude));
+               
+
+            return event.venue.address.city.toLowerCase() === $("#location").val().toLowerCase();
+
+            
         });
-        console.log(eventObject.name);
+    console.log(sfEvents.length);    
     });
 }

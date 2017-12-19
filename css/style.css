@@ -1,6 +1,6 @@
 /* Main Styles */
 body {
-
+/* No body color--keeping it white */
 }
 
 p {
@@ -15,13 +15,99 @@ h2 {
 
 }
 
-/* Container/Content Styles */
-.container {
+/* Jumbotron */
+.jumbotron, .jumbotron-fluid{
+background: url("../images/banner.png");
+background-repeat: no-repeat;
+display: flex;
+justify-content: center;
+align-items: center;
+}
 
+.jumbotron img {
+    min-width: 500px;
+    max-width: 60%;
+    margin-top: -20px;
+    margin-bottom: -50px;
+}
+
+/* Container/Content Styles */
+.wrapper {
+    max-width: 960px;
+    margin: auto;
+}
+
+.row {
+    margin-top: 40px;
+}
+
+.like-table { 
+    display: table;
+    margin: auto;    
+}
+
+.like-table-row { 
+    display: table-row;
+}
+
+.like-table-cell { 
+    display: table-cell;
+    padding-right: 10px; 
+}
+
+#getResults {
+    border-style: solid;
+    border-block-end-width: 3px;
+    border-color: #ffb63d;
+    background-color: #ffcd3f;
+}
+
+#getResults:hover {
+    background-color: #ffb63d;
+}
+
+#filterButtons {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.btn {
+    border-radius: 0px;
+    border-style: solid;
+    border-block-end-width: 3px;
+    border-color: #0056a1;
+    background-color: #0079b9;
+    text-align: center;
+}
+.card {
+	margin-bottom:50px;
+}
+
+.card-header{
+	background-color: #064e98;
+	color:white;
+}
+
+#pixabay {
+	display: block;
+	margin:auto;
+}
+
+.searchImages{
+	width:230px;
+	height:200px;
+	margin:0px 2px 10px 0px;
+}
+
+#eventBox {
+    margin-top: 40px;
 }
 
 /* Google Maps Styles */
 #map {
-    height: 400px;
+    height: 200px;
     width: 100%;
    }
+
+a {
+	color:#ffcd3f;
+}
