@@ -69,30 +69,34 @@ let sortValue = 'distance';
 $(document).ready(function() {
 
     $("#getResults").on("click", function(event) {
-      $('#eventBox').empty();
-      var interest = $('#interest').val().trim();
-        // callPictures(interest);
-        hitSubmit();
+        if (($("#name").val()=="") || $("#interest").val()=="" || $("#location").val()=="" || $("#searchRadius").val()=="") {$('#validationMessage').html("You must fill out all fields.")}
 
-        var searchName;
-        if ($("#name").val()) searchName = $("#name").val().trim();
-        var searchLocation;
-        if ($("#location").val()) searchLocation = $("#location").val().trim();
-        var searchRadius;
-        if ($("#searchRadius").val()) searchRadius = $("#searchRadius").val().trim();
-        var searchInterest;
-        if ($("#interest").val()) searchInterest = $("#interest").val().trim();
+        else {
+          $('#eventBox').empty();
+          $('#validationMessage').empty();
 
-
-        // Create Database object
-
-        var newInput = {
-            name: searchName || "",
-            location: searchLocation,
-            radius: searchRadius,
-            interest: searchInterest, 
+            hitSubmit();
         };
-        database.ref().push(newInput);       
+            var searchName;
+            if ($("#name").val()) searchName = $("#name").val().trim();
+            var searchLocation;
+            if ($("#location").val()) searchLocation = $("#location").val().trim();
+            var searchRadius;
+            if ($("#searchRadius").val()) searchRadius = $("#searchRadius").val().trim();
+            var searchInterest;
+            if ($("#interest").val()) searchInterest = $("#interest").val().trim();
+
+
+            // Create Database object
+
+            var newInput = {
+                name: searchName || "",
+                location: searchLocation,
+                radius: searchRadius,
+                interest: searchInterest, 
+            };
+            database.ref().push(newInput);
+            
 });
 
 $(".sort-button").on("click", function(event) {

@@ -137,6 +137,12 @@ align-items: center;
     width: 100%;
    }
 
+#validationMessage{
+    text-align:center;
+    color:red;
+    margin-top:10px;
+}
+
 a {
 	color:#ffcd3f;
 }
