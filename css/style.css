@@ -17,8 +17,11 @@ align-items: center;
 
 /* Container/Content Styles */
 .wrapper {
-    max-width: 960px;
+    max-width: 80%;
     margin: auto;
+}
+
+.hypers {
 }
 
 .like-table { 
@@ -40,7 +43,7 @@ align-items: center;
     border-block-end-width: 3px;
     border-color: #ffb63d;
     background-color: #ffcd3f;
-    margin-left: 10px;
+    margin-top: 15px;
 }
 
 #getResults:hover {
@@ -51,6 +54,7 @@ align-items: center;
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
 .btn {
     border-radius: 0px;
     border-style: solid;
@@ -117,6 +121,11 @@ align-items: center;
 
 #name, #interest, #location, #searchRadius {
     font-size: 14px;
+    margin-right: 5px;
+}
+
+#center {
+    margin: auto;
 }
 
 #radius {
@@ -136,3 +145,19 @@ a:hover {
     color: #ffb63d;
     text-decoration: none;
 }
+
+/* Media Queries */
+
+/* Small devices (landscape phones, 576px and up)*/
+@media (min-width: 576px) {
+
+ }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
