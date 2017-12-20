@@ -27,6 +27,7 @@
 // );
 // };
 
+
 //Google Places
     var initMap = function(latitude, longitude) {
         var uluru = {lat: latitude, lng: longitude};
@@ -51,7 +52,7 @@
               position: place.geometry.location
             });
             // RATING CALL just need DIV?
-            $(place.rating);
+            console.log(place.rating);
 
             google.maps.event.addListener(marker, 'click', function() {
               infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
