@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
   <!-- I'll add fonts here as a last step once we get logic working -->
-  <link rel="stylesheet" type="text/css" href="css/style.css">  
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">  
 
   <!-- Javascript and jQuery -->
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
@@ -47,21 +48,21 @@
     <div class="col-md-12 defaultdiv">
       <div class="form-group like-table" id="filterButtons">
         <ul class="hypers like-table-row">
-          <li class="like-table-cell"><button data-capacity="capacity" type="button" class="btn btn-primary">High Cap</button></li>
-          <li class="like-table-cell"><button data-distance="distance" type="button" class="btn btn-primary">Nearest</button></li>
-          <li class="like-table-cell"><button data-date="date" type="button" class="btn btn-primary">Date</button></li>
+          <li class="like-table-cell"><button data-type="best" type="button" class="btn btn-primary sort-button">Best</button></li>
+          <li class="like-table-cell"><button data-type="distance" type="button" class="btn btn-primary sort-button">Nearest</button></li>
+          <li class="like-table-cell"><button data-type="-date" type="button" class="btn btn-primary sort-button">Date</button></li>
         </ul>
       </div>
     </div>
       <!-- Inputs -->
-      <div class=" col-md-12 defaultdiv">          
+      <div class="col-md-12 defaultdiv">          
         <div class="form-group like-table">
           <ul class="hypers like-table-row">
-            <li class="like-table-cell"><input id="name" value="John Smith" type="text"></li>
-            <li class="like-table-cell"><input id="interest" value="comic" type="text"></li>
-            <li class="like-table-cell"><input id="location" value=" Richmond" type="text"></li>
-            <li class="like-table-cell"><span>Search Radius (Miles): </span><select id="searchRadius"></select></li>
-            <li class="like-table-cell"><input data-best="best" id="getResults" type="submit"></li>
+            <li class="like-table-cell"><input id="name" placeholder="Name (e.g. John Smith)"></li>
+            <li class="like-table-cell"><input id="interest" placeholder="Interest (e.g. comic)"></li>
+            <li class="like-table-cell"><input id="location" placeholder="City or Zipcode"></li>
+            <li class="like-table-cell"><input id="searchRadius" placeholder="50" type="number"></li>
+            <li class="like-table-cell"><input data-type="distance" id="getResults" type="submit" class="btn btn primary sort-button"></li>
           </ul>
         </div>
       </div>

@@ -1,6 +1,5 @@
-
  // Initialize Firebase
-  var config = {
+ var config = {
     apiKey: "AIzaSyDGdubFGBJWrTFXCFG88AMlwmVyyG1zfP4",
     authDomain: "classdemo-743ef.firebaseapp.com",
     databaseURL: "https://classdemo-743ef.firebaseio.com",
@@ -65,21 +64,12 @@
         });
       } 
 
+let sortValue = 'distance';
 // Logic Below Here //
 $(document).ready(function() {
 
-    $(function(){
-        var $select = $("#searchRadius");
-        for (i=10;i<=100;i=i+10){
-            $select.append($('<option></option>').val(i).html(i))
-        }
-    });
-
-
-
     $("#getResults").on("click", function(event) {
-      event.preventDefault();
-
+      $('#eventBox').empty();
       var interest = $('#interest').val().trim();
         // callPictures(interest);
         hitSubmit();
@@ -104,8 +94,14 @@ $(document).ready(function() {
         };
         database.ref().push(newInput);       
 });
+
+$(".sort-button").on("click", function(event) {
+    $('#eventBox').empty();
+    sortValue = event.currentTarget.getAttribute('data-type');
+    hitSubmit();      
+});
       
-})
+});
     
 
 // Set Functions Below Here //
@@ -113,14 +109,12 @@ $(document).ready(function() {
 
 // Eventbrite
 function hitSubmit() {
-    $('#eventBox').empty();
-    $('.pictures').empty();
- 
+
     const conSettings = {
         url: 'https://www.eventbriteapi.com/v3/events/search/',
         data: {
             token: 'PGYDBOPFSVG2QZQ64KDP', 
-            sort_by: 'distance',  
+            sort_by: sortValue,  
             q: $("#interest").val().trim(),
             "location.address": $("#location").val(), 
             "location.within": $("#searchRadius").val().trim() + "mi",
@@ -133,13 +127,14 @@ function hitSubmit() {
         crossDomain: true,
         method: 'GET'
      }
+
     $.ajax(conSettings).done(function(eventObject){
                 
         const events = eventObject.events;
         const sfEvents = events.filter(function(event){
 
                 
-        $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-3" id="name">' + event.name.text + '</div> <div class="col-md-3" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-3" id="location">' +event.venue.address.city + '</div> <div class="col-md-3" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-12><p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="col-md-12 googlemaps"><div id="map"></div></div>');
+        $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-3" id="event-name">' + event.name.text + '</div> <div class="col-md-3" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-3" id="location">' +event.venue.address.city + '</div> <div class="col-md-3" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-12><p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="col-md-12 googlemaps"><div id="map"></div></div>');
         
             initMap(parseFloat(event.venue.address.latitude), parseFloat(event.venue.address.longitude));
                
