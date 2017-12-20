@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <title>Is-it-worth-it-con</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">  
-  <!-- CSS -->
+  <!-- CSS RESET -->
   <link rel="stylesheet" href="css/reset.css">
 
-  <!-- I'll adjust the bootstrap once we have a topic/layout nailed down -->
+  <!-- BOOTSTRAP -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-  <!-- I'll add fonts here as a last step once we get logic working -->
+  <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="css/style.css">  
 
   <!-- Javascript and jQuery -->
@@ -24,8 +24,9 @@
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArlFHWVcjkg8WiQljm_jOx0dObvApNOy8&libraries=places&callback=initMap">
   </script>
+
   <!-- firebase -->
-  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   
 <!-- firebase storage -->
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script>
@@ -40,34 +41,46 @@
       <div class="jumbotron jumbotron-fluid">
         <img src="images/logo.svg">
       </div>
-    
-    
+    <!-- firebase img -->
+  <!-- <div class="row">
+    <div class="col-sm-12">
+      <img class="col-sm-3" id="myimg0">
+      <img class="col-sm-3" id="myimg1">
+      <img class="col-sm-3" id="myimg2">
+      <img class="col-sm-2" id="myimg3">
+    </div>
+  </div> -->
     <!-- Sort By Buttons-->
   <div class="wrapper">
     <div class="col-md-12 defaultdiv">
       <div class="form-group like-table" id="filterButtons">
         <ul class="hypers like-table-row">
           <li class="like-table-cell"><button data-capacity="capacity" type="button" class="btn btn-primary">High Cap</button></li>
-          <li class="like-table-cell"><button data-distance="distance"type="button" class="btn btn-primary">Nearest</button></li>
+          <li class="like-table-cell"><button data-distance="distance" type="button" class="btn btn-primary">Nearest</button></li>
           <li class="like-table-cell"><button data-date="date" type="button" class="btn btn-primary">Date</button></li>
         </ul>
       </div>
     </div>
       <!-- Inputs -->
-      <div class=" col-md-12 defaultdiv">          
+    <div class="row">
+      <div class=" col-sm-12 defaultdiv">       
         <div class="form-group like-table">
           <ul class="hypers like-table-row">
-            <li class="like-table-cell"><input id="name" value="John Smith"></li>
-            <li class="like-table-cell"><input id="interest" value="comic"></li>
-            <li class="like-table-cell"><input id="location" value=" Richmond"></li>
-            <li class="like-table-cell"><input id="searchRadius" value="50"></li>
+            <li class="like-table-cell"><input id="name" value="John Smith" type="text"></li>
+            <li class="like-table-cell"><input id="interest" value="comic" type="text"></li>
+            <li class="like-table-cell"><input id="location" value=" Richmond" type="text"></li>
+            <li class="like-table-cell"><span>Search Radius (Miles): </span><select id="searchRadius"></select></li>
             <li class="like-table-cell"><input data-best="best" id="getResults" type="submit"></li>
           </ul>
         </div>
       </div>
+    </div>
+
+
+
 
 <!-- event list items  -->
-  <div class="container" id="eventBox" style="margin-top: 40px">  </div>
+  <div class="container" id="eventBox">  </div>
  </div> <!--Wrapper End -->
 
   </body>
