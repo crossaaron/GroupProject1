@@ -17,7 +17,6 @@
     var count = 0
 
 
-
 //Google Places
     var initMap = function(latitude, longitude) {
         var uluru = {lat: latitude, lng: longitude};
@@ -124,6 +123,7 @@ function hitSubmit() {
 
                 
         $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-4" id="name">' + event.name.text + '</div> <div class="col-md-2" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-2" id="location">' +event.venue.address.city + '</div> <div class="col-md-2" id="rating"> </div> <div class="col-md-2" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-12><p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="col-md-12 googlemaps"><div id="map"></div></div><div class="row"><div class="col-sm-12"><img class="col-sm-3" id="myimg0"><img class="col-sm-3" id="myimg1"><img class="col-sm-3" id="myimg2"><img class="col-sm-2" id="myimg3"></div></div>');
+
 
             initMap(parseFloat(event.venue.address.latitude), parseFloat(event.venue.address.longitude));
             getPics();

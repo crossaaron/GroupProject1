@@ -37,23 +37,23 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="jumbotron jumbotron-fluid">
+      <div class="jumbotron jumbotron-fluid">
         <img src="images/logo.svg">
       </div>
     
     
     <!-- Sort By Buttons-->
-    <div class="form-group like-table" id="filterButtons">
-      <ul class="hypers like-table-row">
-        <li class="like-table-cell"><button data-capacity="capacity" type="button" class="btn btn-primary">High Cap</button></li>
-        <li class="like-table-cell"><button data-distance="distance"type="button" class="btn btn-primary">Nearest</button></li>
-        <li class="like-table-cell"><button data-date="date" type="button" class="btn btn-primary">Date</button></li>
-      </ul>
+  <div class="wrapper">
+    <div class="col-md-12 defaultdiv">
+      <div class="form-group like-table" id="filterButtons">
+        <ul class="hypers like-table-row">
+          <li class="like-table-cell"><button data-capacity="capacity" type="button" class="btn btn-primary">High Cap</button></li>
+          <li class="like-table-cell"><button data-distance="distance"type="button" class="btn btn-primary">Nearest</button></li>
+          <li class="like-table-cell"><button data-date="date" type="button" class="btn btn-primary">Date</button></li>
+        </ul>
+      </div>
     </div>
-
       <!-- Inputs -->
-    <div class="wrapper">          
       <div class=" col-md-12 defaultdiv">          
         <div class="form-group like-table">
           <ul class="hypers like-table-row">
@@ -62,28 +62,13 @@
             <li class="like-table-cell"><input id="location" value=" Richmond"></li>
             <li class="like-table-cell"><input id="searchRadius" value="50"></li>
             <li class="like-table-cell"><input data-best="best" id="getResults" type="submit"></li>
-        </ul>
+          </ul>
         </div>
       </div>
-    </div>
 
 <!-- event list items  -->
-  <div class="container" id="eventBox" style="margin-top: 40px">  
-  </div>
-
-<!-- pictures from pixabay -->
-  
-
-  <!-- Google Maps here if we need it-->
-    <!-- <div class="row" style="margin-top: 40px">
-        <div class="col-md-12 googlemaps">
-          <div id="map"></div>
-        </div>            
-    </div>
- -->
-
-
-
+  <div class="container" id="eventBox" style="margin-top: 40px">  </div>
+ </div> <!--Wrapper End -->
 
   </body>
 </html> 
