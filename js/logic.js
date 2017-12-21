@@ -13,8 +13,8 @@
     var storage = firebase.storage();
     var storageRef = storage.ref();
     var gsReference = storage.refFromURL('gs://classdemo-743ef.appspot.com/conImages/battlestar.jpeg')
-    var count = 0
-
+    var picCount = 0
+    var eventCount = 0
 
 
 //Google Places
@@ -32,7 +32,7 @@
 
         var infowindow = new google.maps.InfoWindow();
         var service = new google.maps.places.PlacesService(map);
-
+        
         service.getDetails({
 
           placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'},
@@ -51,6 +51,7 @@
                         infowindow.open(map, this);
 
                     });
+
                 }
             }); 
     } 
@@ -61,6 +62,8 @@ $(document).ready(function() {
 
   
     $("#getResults").on("click", function(event) {
+      picCount = 0
+      eventCount = 0
       if (($("#name").val()=="") || $("#interest").val()=="" || $("#location").val()=="" || $("#searchRadius").val()=="") {$('#validationMessage').html("You must fill out all fields.")}
 
         else {
@@ -90,12 +93,14 @@ $(document).ready(function() {
         };
         database.ref().push(newInput);
 
-$(".sort-button").on("click", function(event) {
-    $('#eventBox').empty();
-    sortValue = event.currentTarget.getAttribute('data-type');
-    hitSubmit();      
-});
+    $(".sort-button").on("click", function(event) {
+        $('#eventBox').empty();
+        sortValue = event.currentTarget.getAttribute('data-type');
+        console.log(sortValue);
+        hitSubmit();      
+    });
       
+    });
 });
     
 
@@ -121,38 +126,40 @@ function hitSubmit() {
         }, 
         crossDomain: true,
         method: 'GET'
-     }
+    }
      
 
     $.ajax(conSettings).done(function(eventObject){
                 
         const events = eventObject.events;
-        const getEvents = events.filter(function(event){
+        
+        for (var i = 0; i < events.length; i++) {
 
-           
+        $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-5" id="name">' + events[eventCount].name.text + '</div> <div class="col-md-2" id="price">' + '<a target="_blank" href="' + events[eventCount].url + '">Tickets/Pricing</a></div> <div class="col-md-2" id="location">' + events[eventCount].venue.address.city + '</div><div class="col-md-2" id="date">' + moment(events[eventCount].end.utc).format("MMM,DD,YYYY") + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-12><p class="card-text" id="eventDescription">' + events[eventCount].description.text + '</p></div><div class="row"><div class="col-sm-12"><img class="col-sm-3" id="myimg0"><img class="col-sm-3" id="myimg1"><img class="col-sm-3" id="myimg2"><img class="col-sm-2" id="myimg3"></div></div><div class="col-md-12 googlemaps"><div id="map"></div></div>');
 
-
-        $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-5" id="name">' + event.name.text + '</div> <div class="col-md-2" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-2" id="location">' +event.venue.address.city + '</div><div class="col-md-2" id="date">' + moment(event.end.utc).format("MMM,DD,YYYY") + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-12><p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="row"><div class="col-sm-12"><img class="col-sm-3" id="myimg0"><img class="col-sm-3" id="myimg1"><img class="col-sm-3" id="myimg2"><img class="col-sm-2" id="myimg3"></div></div><div class="col-md-12 googlemaps"><div id="map"></div></div>');
-
-
-            initMap(parseFloat(event.venue.address.latitude), parseFloat(event.venue.address.longitude));
             getPics();
-
-        });
+            initMap(parseFloat(events[eventCount].venue.address.latitude), parseFloat(events[eventCount].venue.address.longitude));
+        
+        console.log(events[eventCount].name.text);
+        eventCount++
+       
+        };
     });
 }
 
 // pull pictures from firebase storage
-    function getPics() {
+    function getPics() { 
         for (var i = 0; i < 4; i++) {
             picNumb = Math.floor(Math.random() * 24)
 
-        storageRef.child('conImages/pic'+ picNumb + '.jpeg').getDownloadURL().then(function(url){
+            storageRef.child('conImages/pic'+ picNumb + '.jpeg').getDownloadURL().then(function(url){
 
-        var img = document.getElementById('myimg'+ count);
-        img.src = url;
-        count++
-        });
+                var img = document.getElementById('myimg'+ picCount);
+                img.src = url;
+                console.log(img);
+                picCount++
+            });
         };
+        
     };
-});
+    
