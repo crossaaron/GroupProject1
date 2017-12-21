@@ -9,8 +9,8 @@ align-items: center;
 }
 
 .jumbotron img {
-    min-width: 500px;
-    max-width: 60%;
+    height: auto;
+    width: 50%;
     margin-top: -20px;
     margin-bottom: -50px;
 }
