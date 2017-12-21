@@ -26,7 +26,7 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArlFHWVcjkg8WiQljm_jOx0dObvApNOy8&libraries=places&callback=initMap">
   </script>
   <!-- firebase -->
-  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
   
 <!-- firebase storage -->
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script>
@@ -55,21 +55,23 @@
       </div>
     </div>
       <!-- Inputs -->
+      <div class="row" id="center">        
+            <input id="name" class="col-md-2 offset-md-2" placeholder="Name (e.g. John Smith)">
+            <input id="interest" class="col-md-2" placeholder="Interest (e.g. comic)">
+            <input id="location" class="col-md-2" placeholder="City or Zipcode">
+            <input id="searchRadius" class="col-md-2" placeholder="50" type="number">
+      </div>
+      <div><p id="validationMessage"></p></div>
+
       <div class="col-md-12 defaultdiv">          
         <div class="form-group like-table">
-          <ul class="hypers like-table-row">
-            <li class="like-table-cell"><input id="name" placeholder="Name (e.g. John Smith)"></li>
-            <li class="like-table-cell"><input id="interest" placeholder="Interest (e.g. comic)"></li>
-            <li class="like-table-cell"><input id="location" placeholder="City or Zipcode"></li>
-            <li class="like-table-cell"><input id="searchRadius" placeholder="50" type="number"></li>
+          <ul class="hypers row col-md-12">
             <li class="like-table-cell"><input data-type="distance" id="getResults" type="submit" class="btn btn primary sort-button"></li>
           </ul>
         </div>
       </div>
-
-<!-- event list items  -->
-  <div class="container" id="eventBox">  </div>
- </div> <!--Wrapper End -->
+      <div class="container" id="eventBox">  </div>
+  </div> <!--Wrapper End -->
 
   </body>
 </html> 

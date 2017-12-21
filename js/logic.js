@@ -7,25 +7,14 @@
     storageBucket: "classdemo-743ef.appspot.com",
     messagingSenderId: "109836927180"
   };
-  
-
-    firebase.initializeApp(config);
-    var database = firebase.database();  
+  firebase.initializeApp(config);
     
-// Pixabay
-// var callPictures = function(interestInput) {
+    var database = firebase.database(); 
+    var storage = firebase.storage();
+    var storageRef = storage.ref();
+    var gsReference = storage.refFromURL('gs://classdemo-743ef.appspot.com/conImages/battlestar.jpeg')
+    var count = 0
 
-// $.ajax({
-//     url: "https://pixabay.com/api/?key="+"7371572-b4d7f234c51422f2be6d8c9f2"+"&q="+encodeURIComponent(interestInput),
-//     method: 'GET'
-// }).done(function (response){
-//     for (var i = 0; i < 4; i++) {
-//     $('.pictures').prepend("<img class = 'searchImages' src='" + response.hits[i].webformatURL + "'>");
-//     };
-//     console.log(response.hits[0].webformatURL);
-//     }
-// );
-// };
 
 
 //Google Places
@@ -35,6 +24,7 @@
           center: uluru,
           zoom: 15
         });
+
         var marker = new google.maps.Marker({
             position: uluru ,
             map: map
@@ -44,36 +34,43 @@
         var service = new google.maps.places.PlacesService(map);
 
         service.getDetails({
-          placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-        }, function(place, status) {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            var marker = new google.maps.Marker({
-              map: map,
-              position: place.geometry.location
-            });
-            // RATING CALL just need DIV?
-            console.log(place.rating);
 
-            google.maps.event.addListener(marker, 'click', function() {
-              infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-                'Place ID: ' + place.place_id + '<br>' +
-                place.formatted_address + '</div>');
-              infowindow.open(map, this);
-            });
-          }
-        });
-      } 
+          placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'},
+        
+            function(place, status) {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                        'Place ID: ' + place.place_id + '<br>' +
+                        place.formatted_address + '</div>');
+                        infowindow.open(map, this);
+
+                    });
+                }
+            }); 
+    } 
 
 let sortValue = 'distance';
 // Logic Below Here //
 $(document).ready(function() {
 
+  
     $("#getResults").on("click", function(event) {
-      $('#eventBox').empty();
-      var interest = $('#interest').val().trim();
-        // callPictures(interest);
-        hitSubmit();
+      if (($("#name").val()=="") || $("#interest").val()=="" || $("#location").val()=="" || $("#searchRadius").val()=="") {$('#validationMessage').html("You must fill out all fields.")}
 
+        else {
+          $('#eventBox').empty();
+          $('#validationMessage').empty();
+
+            hitSubmit();
+        };
+
+        var interest = $('#interest').val().trim();
         var searchName;
         if ($("#name").val()) searchName = $("#name").val().trim();
         var searchLocation;
@@ -81,18 +78,17 @@ $(document).ready(function() {
         var searchRadius;
         if ($("#searchRadius").val()) searchRadius = $("#searchRadius").val().trim();
         var searchInterest;
+      //might be something weird here...
         if ($("#interest").val()) searchInterest = $("#interest").val().trim();
 
         // Create Database object
-
         var newInput = {
             name: searchName || "",
             location: searchLocation,
             radius: searchRadius,
             interest: searchInterest, 
         };
-        database.ref().push(newInput);       
-});
+        database.ref().push(newInput);
 
 $(".sort-button").on("click", function(event) {
     $('#eventBox').empty();
@@ -103,8 +99,8 @@ $(".sort-button").on("click", function(event) {
 });
     
 
-// Set Functions Below Here //
 
+// Set Functions Below Here //
 
 // Eventbrite
 function hitSubmit() {
@@ -126,22 +122,36 @@ function hitSubmit() {
         crossDomain: true,
         method: 'GET'
      }
+     console.log(conSettings);
 
     $.ajax(conSettings).done(function(eventObject){
                 
         const events = eventObject.events;
-        const sfEvents = events.filter(function(event){
+        const getEvents = events.filter(function(event){
 
                 
-        $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-3" id="event-name">' + event.name.text + '</div> <div class="col-md-3" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-3" id="location">' +event.venue.address.city + '</div> <div class="col-md-3" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-12><p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="col-md-12 googlemaps"><div id="map"></div></div>');
-        
+
+        $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-5" id="name">' + event.name.text + '</div> <div class="col-md-2" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-2" id="location">' +event.venue.address.city + '</div><div class="col-md-2" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-12><p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="row"><div class="col-sm-12"><img class="col-sm-3" id="myimg0"><img class="col-sm-3" id="myimg1"><img class="col-sm-3" id="myimg2"><img class="col-sm-2" id="myimg3"></div></div><div class="col-md-12 googlemaps"><div id="map"></div></div>');
+
+
             initMap(parseFloat(event.venue.address.latitude), parseFloat(event.venue.address.longitude));
-               
+            getPics();
 
-            return event.venue.address.city.toLowerCase() === $("#location").val().toLowerCase();
-
-            
         });
-    console.log(sfEvents.length);    
     });
 }
+
+// pull pictures from firebase storage
+    function getPics() {
+        for (var i = 0; i < 4; i++) {
+            picNumb = Math.floor(Math.random() * 24)
+
+        storageRef.child('conImages/pic'+ picNumb + '.jpeg').getDownloadURL().then(function(url){
+
+        var img = document.getElementById('myimg'+ count);
+        img.src = url;
+        count++
+        });
+        };
+    };
+});
