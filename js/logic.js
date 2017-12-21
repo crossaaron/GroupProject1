@@ -1,6 +1,5 @@
-
  // Initialize Firebase
-  var config = {
+ var config = {
     apiKey: "AIzaSyDGdubFGBJWrTFXCFG88AMlwmVyyG1zfP4",
     authDomain: "classdemo-743ef.firebaseapp.com",
     databaseURL: "https://classdemo-743ef.firebaseio.com",
@@ -15,6 +14,7 @@
     var storageRef = storage.ref();
     var gsReference = storage.refFromURL('gs://classdemo-743ef.appspot.com/conImages/battlestar.jpeg')
     var count = 0
+
 
 
 //Google Places
@@ -34,6 +34,7 @@
         var service = new google.maps.places.PlacesService(map);
 
         service.getDetails({
+
           placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'},
         
             function(place, status) {
@@ -54,23 +55,22 @@
             }); 
     } 
 
+let sortValue = 'distance';
 // Logic Below Here //
 $(document).ready(function() {
 
-    $(function(){
-        var $select = $("#searchRadius");
-        for (i=10;i<=100;i=i+10){
-            $select.append($('<option></option>').val(i).html(i))
-        }
-    });
-
-    
+  
     $("#getResults").on("click", function(event) {
-      event.preventDefault();
+      if (($("#name").val()=="") || $("#interest").val()=="" || $("#location").val()=="" || $("#searchRadius").val()=="") {$('#validationMessage').html("You must fill out all fields.")}
+
+        else {
+          $('#eventBox').empty();
+          $('#validationMessage').empty();
+
+            hitSubmit();
+        };
 
         var interest = $('#interest').val().trim();
-        hitSubmit();
-
         var searchName;
         if ($("#name").val()) searchName = $("#name").val().trim();
         var searchLocation;
@@ -78,6 +78,7 @@ $(document).ready(function() {
         var searchRadius;
         if ($("#searchRadius").val()) searchRadius = $("#searchRadius").val().trim();
         var searchInterest;
+      //might be something weird here...
         if ($("#interest").val()) searchInterest = $("#interest").val().trim();
 
         // Create Database object
@@ -89,21 +90,26 @@ $(document).ready(function() {
         };
         database.ref().push(newInput);
 
-    });
+$(".sort-button").on("click", function(event) {
+    $('#eventBox').empty();
+    sortValue = event.currentTarget.getAttribute('data-type');
+    hitSubmit();      
+});
       
-})
+});
+    
+
+
 // Set Functions Below Here //
 
 // Eventbrite
 function hitSubmit() {
-    $('#eventBox').empty();
-    $('.pictures').empty();
- 
+
     const conSettings = {
         url: 'https://www.eventbriteapi.com/v3/events/search/',
         data: {
             token: 'PGYDBOPFSVG2QZQ64KDP', 
-            sort_by: 'distance',  
+            sort_by: sortValue,  
             q: $("#interest").val().trim(),
             "location.address": $("#location").val(), 
             "location.within": $("#searchRadius").val().trim() + "mi",
@@ -116,12 +122,15 @@ function hitSubmit() {
         crossDomain: true,
         method: 'GET'
      }
+     console.log(conSettings);
+
     $.ajax(conSettings).done(function(eventObject){
                 
         const events = eventObject.events;
         const getEvents = events.filter(function(event){
 
                 
+
         $("#eventBox").prepend('<div class="card listEntry"><div class="card-header"> <div class="row"> <div class="col-md-4" id="name">' + event.name.text + '</div> <div class="col-md-2" id="price">' + '<a target="_blank" href="' + event.url + '">Tickets/Pricing</a></div> <div class="col-md-2" id="location">' +event.venue.address.city + '</div> <div class="col-md-2" id="rating"> </div> <div class="col-md-2" id="date">' + event.end.utc + '</div> </div> </div> <div class="card-body"> <div class="row"><div class=col-md-12><p class="card-text" id="eventDescription">' + event.description.text + '</p></div><div class="row"><div class="col-sm-12"><img class="col-sm-3" id="myimg0"><img class="col-sm-3" id="myimg1"><img class="col-sm-3" id="myimg2"><img class="col-sm-2" id="myimg3"></div></div><div class="col-md-12 googlemaps"><div id="map"></div></div>');
 
 
